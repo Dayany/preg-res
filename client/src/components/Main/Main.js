@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import React from "react";
+import AddQuestion from "../Question/AddQuestion.js";
 
 const { useEffect, useState } = require("react");
 
@@ -20,6 +21,7 @@ function Main() {
   };
   return (
     <React.Fragment>
+    <AddQuestion />
         <div>
         { questions.map( question => (
            <h3 key={question._id}><Link to={{ pathname: `/question`,  state: { question } }} > { question.text }</Link></h3>
