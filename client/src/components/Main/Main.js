@@ -24,7 +24,7 @@ function Main() {
     <AddQuestion />
         <div>
         { questions.map( question => (
-           <h3 key={question._id}><Link to={{ pathname: `/question`,  state: { question } }} > { question.text }</Link></h3>
+           <h3 key={question._id}><Link key={question._id} to={{ pathname: `/question`,  state: { question } }} > { question.text }</Link></h3>
         )) }
         </div>
     </React.Fragment>

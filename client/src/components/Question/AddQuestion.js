@@ -29,7 +29,7 @@ class AddQuestion extends React.Component {
 
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Pregunta</Form.Label>
-          <Form.Control type="text" placeholder="text" />
+          <Form.Control type="text" placeholder="Pregunta" />
         </Form.Group>
         <Button variant="primary" type="submit">
           Submit
