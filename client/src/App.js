@@ -10,7 +10,7 @@ function App() {
     <Router>
       <Container>
         <Row>
-          <h1>Application</h1>
+          <h1>Pregunta</h1>
         </Row>
         <Switch>
           <Route path="/" exact component={Main} />

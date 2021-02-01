@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 
 const questionSchema = mongoose.Schema({
-  schema: {
+  schema_ver: {
     type: Number,
+    default: 1,
   },
   date: {
     type: Date,
@@ -18,17 +19,9 @@ const questionSchema = mongoose.Schema({
   answers: [
     {
       body: String,
-      date: Date.now,
+      date: Date,
     },
   ],
-  date: {
-    type: Date,
-    default: Date.now,
-  },
 });
-
-function setAnswer(num) {
-  return (num / 100).toFixed(2);
-}
 
 module.exports = mongoose.model("Question", questionSchema);

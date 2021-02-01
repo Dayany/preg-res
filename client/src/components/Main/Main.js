@@ -14,9 +14,9 @@ function Main() {
   const [questions, setQuestions] = useState([]);
 
   const  fetchQuestions = async () => {
-    const questions = [{ id: "211312", text: "Tesasdasdsat"}, { id: "2113123", text: "Tesasdasdsatckjnzxkcn"}];
-    // const data = await fetch("http://localhost:8080/question");
-    // const questions = await data.json();
+    // const questions = [{ id: "211312", text: "Tesasdasdsat"}, { id: "2113123", text: "Tesasdasdsatckjnzxkcn"}];
+    const data = await fetch("http://localhost:8080/question");
+    const questions = await data.json();
     setQuestions(questions);
   };
   return (

@@ -6,7 +6,8 @@ const router = express.Router();
 //Add a question
 router.post("/add", async (req, res) => {
   const question = new Question({
-    text: req.body.amount,
+    text: req.body.text,
+    email: req.body.email,
   });
 
   try {
@@ -28,24 +29,24 @@ router.get("/", async (req, res) => {
 });
 
 //Get a specific question
-router.get("/:questionId", async (req, res) => {
-  try 
-    const question = await Question.findById(req.params.questionId);
-    res.json(question);
-  } catch (error) {
-    res.json({ message: error });
-  }
-});
+// router.get("/:questionId", async (req, res) => {
+//   try 
+//     const question = await Question.findById(req.params.questionId);
+//     res.json(question);
+//   } catch (error) {
+//     res.json({ message: error });
+//   }
+// });
 
 //Delete question
-router.delete("/:questionId", async (req, res) => {
-  try {
-    const removedQuestion = await Question.remove({ _id: req.params.questionId });
-    res.json(removedQuestion);
-  } catch (error) {
-    res.json({ message: error });
-  }
-});
+// router.delete("/:questionId", async (req, res) => {
+//   try {
+//     const removedQuestion = await Question.remove({ _id: req.params.questionId });
+//     res.json(removedQuestion);
+//   } catch (error) {
+//     res.json({ message: error });
+//   }
+// });
 
 
 module.exports = router;
