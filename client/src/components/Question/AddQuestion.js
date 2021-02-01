@@ -29,7 +29,6 @@ class AddQuestion extends React.Component {
         return response.json();
       })
       .then(function (body) {
-        console.log(body);
       });
   }
   render() {

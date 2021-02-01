@@ -5,7 +5,6 @@ import AddAnswer from "../Answer/AddAnswer";
 //View for a single question.
 //Display answers if any
 const ViewQuestion = (props) => {
-  console.log(props.location.state.question.answers);
   if (typeof props.location.state === "undefined") {
     return <Redirect to="/" />;
   }
