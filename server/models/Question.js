@@ -18,8 +18,7 @@ const questionSchema = mongoose.Schema({
   },
   answers: [
     {
-      body: String,
-      date: Date,
+      text: String,
     },
   ],
 });

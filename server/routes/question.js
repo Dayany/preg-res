@@ -28,11 +28,26 @@ router.get("/", async (req, res) => {
   }
 });
 
-//Get a specific question
-// router.get("/:questionId", async (req, res) => {
-//   try 
-//     const question = await Question.findById(req.params.questionId);
-//     res.json(question);
+//Add answer
+router.patch("/addanswer/:questionId", async (req, res) => {
+  try {
+    const updatedAnswer = await Question.updateOne(
+      { _id: req.params.questionId },
+      { $push: { answers: { text: JSON.stringify(req.body.text )} } }
+    );
+    res.json(updatedAnswer);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+//Update charge
+// router.patch("/addanswer/:chargeId", async (req, res) => {
+//   try {
+//     const updatedCharge = await Charge.updateOne(
+//       { _id: req.params.chargeId },
+//       { $set: { answers : req.body.answer } }
+//     );
+//     res.json(updatedCharge);
 //   } catch (error) {
 //     res.json({ message: error });
 //   }
@@ -47,6 +62,5 @@ router.get("/", async (req, res) => {
 //     res.json({ message: error });
 //   }
 // });
-
 
 module.exports = router;
