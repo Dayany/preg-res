@@ -4,30 +4,49 @@ import AddAnswer from "../Answer/AddAnswer";
 
 //View for a single question.
 //Display answers if any
-const ViewQuestion = (props) => {
-  if (typeof props.location.state === "undefined") {
-    return <Redirect to="/" />;
+class ViewQuestion extends React.Component {
+  constructor(props) {
+    super(props);
+
+    // if (!this.props.location.state) {
+    //   this.setState({ redirect: true });
+    //   console.log("laskdklsj");
+    // } else {
+      this.state = {
+        answers: this.props.location.state.question.answers,
+      };
+    // }
+    this.updateAnswers = this.updateAnswers;
   }
-
-  return (
-    <React.Fragment>
-      <div>
-        <h3 key={props.location.state.question.id}>
-          <p>{props.location.state.question.text}</p>
-        </h3>
-        <AddAnswer state={props.location.state.question._id} />
-
+  updateAnswers = (answer) => {
+    const newAnswers = this.state.answers.concat(answer);
+    console.log(newAnswers);
+    this.setState(newAnswers);
+  };
+  render() {
+    return (
+      <React.Fragment>
+        {/* {this.props.location.state.redirect ?  <Redirect to="/" /> : null} */}
         <div>
-          {props.location.state.question.answers.map((answer) => (
-            <h3 key={answer._id}>
-             
-             <p>{ answer.text}</p>
-            </h3>
-          ))}
+          <h3 key={this.props.location.state.question.id}>
+            <p>{this.props.location.state.question.text}</p>
+          </h3>
+          <AddAnswer
+            updateAnswerChild={this.updateAnswers}
+            state={this.props.location.state.question._id}
+          />
+
+          <div>
+            {this.state.answers.map((answer) => (
+              <h3 key={answer._id}>
+                <p>{answer.text}</p>
+              </h3>
+            ))}
+          </div>
         </div>
-      </div>
-    </React.Fragment>
-  );
-};
+      </React.Fragment>
+    );
+  }
+}
 
 export default ViewQuestion;

@@ -20,6 +20,9 @@ const questionSchema = mongoose.Schema({
     {
       text: String,
     },
+    {
+      createdAt: Date
+    }
   ],
 });
 

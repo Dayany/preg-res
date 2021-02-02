@@ -4,15 +4,11 @@ import { Form, Button } from "react-bootstrap";
 class AddAnswer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { answer : null };
+    this.state = { answer: null };
 
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.formBasicPassword });
-  }
   handleSubmit(event) {
     event.preventDefault();
 
@@ -20,16 +16,26 @@ class AddAnswer extends React.Component {
       text: event.target.answer.value,
     };
     const requestOptions = {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-  };
-    fetch(`http://localhost:8080/question/addanswer/${ event.target.questionId.value }`, requestOptions)
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    };
+    fetch(
+      `http://localhost:8080/question/addanswer/${event.target.questionId.value}`,
+      requestOptions
+    )
       .then(function (response) {
-        return response.json();
+         return response.json().then((data) => ({
+          data: data,
+        }));
       })
       .then(function (body) {
       });
+
+      console.log(data);
+      this.props.updateAnswerChild({ _id: "Newid", text: data.text});
+
+      
   }
   render() {
     return (
@@ -38,8 +44,9 @@ class AddAnswer extends React.Component {
           <Form.Control
             style={{ display: "none" }}
             type="text"
-            value={this.props.state} 
+            defaultValue={this.props.state}
             name="questionId"
+            
           />
         </Form.Group>
         <Form.Group controlId="formBasicAddAnswer">
