@@ -49,12 +49,10 @@ class AddAnswer extends React.Component {
                 name="questionId"
               />
             </Form.Group>
-            <Form.Row>
-              <Form.Group controlId="formBasicAddAnswer">
-                <Form.Label>Respuesta</Form.Label>
-                <Form.Control type="text" placeholder="text" name="answer" />
-              </Form.Group>
-            </Form.Row>
+            <Form.Group controlId="formBasicAddAnswer">
+              <Form.Label>Respuesta</Form.Label>
+              <Form.Control as="textarea" placeholder="text" name="answer" />
+            </Form.Group>
             <Form.Group controlId="formBasicCheckbox">
               <Form.Check type="checkbox" label="Respuesta privada?" />
             </Form.Group>
