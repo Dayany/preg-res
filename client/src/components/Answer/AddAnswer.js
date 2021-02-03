@@ -35,30 +35,41 @@ class AddAnswer extends React.Component {
   }
   render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <Form.Group controlId="formBasicQuestionID">
-          <Form.Control
-            style={{ display: "none" }}
-            type="text"
-            defaultValue={this.props.state}
-            name="questionId"
-          />
-        </Form.Group>
-        <Form.Row>
-          <Form.Group controlId="formBasicAddAnswer">
-            <Form.Label>Respuesta</Form.Label>
-            <Form.Control type="text" placeholder="text" name="answer" />
-          </Form.Group>
-        </Form.Row>
-        <Row>
-          <Form.Group controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Respuesta privada?" />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Row>
-      </Form>
+      <Row>
+        <div class="col-md-12">
+          <Form
+            className="card bg-primary text-white "
+            onSubmit={this.handleSubmit}
+          >
+            <Form.Group controlId="formBasicQuestionID">
+              <Form.Control
+                style={{ display: "none" }}
+                type="text"
+                defaultValue={this.props.state}
+                name="questionId"
+              />
+            </Form.Group>
+            <Form.Row>
+              <Form.Group controlId="formBasicAddAnswer">
+                <Form.Label>Respuesta</Form.Label>
+                <Form.Control type="text" placeholder="text" name="answer" />
+              </Form.Group>
+            </Form.Row>
+            <Form.Group controlId="formBasicCheckbox">
+              <Form.Check type="checkbox" label="Respuesta privada?" />
+            </Form.Group>
+            <center>
+              <Button
+                className="btn btn-primary border-white mt-auto"
+                variant="primary"
+                type="submit"
+              >
+                Submit
+              </Button>
+            </center>
+          </Form>
+        </div>
+      </Row>
     );
   }
 }
