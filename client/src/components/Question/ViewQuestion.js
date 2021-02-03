@@ -10,7 +10,6 @@ class ViewQuestion extends React.Component {
 
     // if (!this.props.location.state) {
     //   this.setState({ redirect: true });
-    //   console.log("laskdklsj");
     // } else {
       this.state = {
         answers: this.props.location.state.question.answers,
@@ -20,9 +19,9 @@ class ViewQuestion extends React.Component {
   }
   updateAnswers = (answer) => {
     const newAnswers = this.state.answers.concat(answer);
-    console.log(newAnswers);
-    this.setState(newAnswers);
+    this.setState({ answers: newAnswers}); 
   };
+
   render() {
     return (
       <React.Fragment>

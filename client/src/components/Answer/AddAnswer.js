@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Row } from "react-bootstrap";
 
 class AddAnswer extends React.Component {
   constructor(props) {
@@ -25,17 +25,13 @@ class AddAnswer extends React.Component {
       requestOptions
     )
       .then(function (response) {
-         return response.json().then((data) => ({
+        return response.json().then((data) => ({
           data: data,
         }));
       })
-      .then(function (body) {
-      });
+      .then(function (body) {});
 
-      console.log(data);
-      this.props.updateAnswerChild({ _id: "Newid", text: data.text});
-
-      
+    this.props.updateAnswerChild({ _id: "Newid", text: data.text });
   }
   render() {
     return (
@@ -46,19 +42,22 @@ class AddAnswer extends React.Component {
             type="text"
             defaultValue={this.props.state}
             name="questionId"
-            
           />
         </Form.Group>
-        <Form.Group controlId="formBasicAddAnswer">
-          <Form.Label>Respuesta</Form.Label>
-          <Form.Control type="text" placeholder="text" name="answer" />
-        </Form.Group>
-        <Form.Group controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Respuesta privada?" />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
+        <Form.Row>
+          <Form.Group controlId="formBasicAddAnswer">
+            <Form.Label>Respuesta</Form.Label>
+            <Form.Control type="text" placeholder="text" name="answer" />
+          </Form.Group>
+        </Form.Row>
+        <Row>
+          <Form.Group controlId="formBasicCheckbox">
+            <Form.Check type="checkbox" label="Respuesta privada?" />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Row>
       </Form>
     );
   }
