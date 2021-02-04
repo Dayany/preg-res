@@ -12,9 +12,6 @@ function App() {
       <section class="jumbotron text-center">
         <Container>
           <Router>
-            <Row>
-              <h1>Pregunta</h1>
-            </Row>
             <Switch>
               <Route path="/" exact component={Main} />
               <Route path="/question" component={ViewQuestion} />

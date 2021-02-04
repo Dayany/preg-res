@@ -38,6 +38,7 @@ class AddAnswer extends React.Component {
       <Row>
         <div class="col-md-12">
           <Form
+            style={{ padding: "15px" }}
             className="card bg-primary text-white "
             onSubmit={this.handleSubmit}
           >
@@ -51,7 +52,7 @@ class AddAnswer extends React.Component {
             </Form.Group>
             <Form.Group controlId="formBasicAddAnswer">
               <Form.Label>Respuesta</Form.Label>
-              <Form.Control as="textarea" placeholder="text" name="answer" />
+              <Form.Control as="textarea" placeholder="Escriba su respuesta aca" name="answer" />
             </Form.Group>
             <Form.Group controlId="formBasicCheckbox">
               <Form.Check type="checkbox" label="Respuesta privada?" />

@@ -35,7 +35,7 @@ class AddQuestion extends React.Component {
       <Row>
         <div class="col-md-12">
           <Form
-            style={{ magin: "100x !important" }}
+            style={{ padding: "15px" }}
             className="card bg-primary text-white "
             onSubmit={this.handleSubmit}
           >
@@ -49,10 +49,10 @@ class AddQuestion extends React.Component {
             </Form.Group>
 
             <Form.Group controlId="formBasicQuestion">
-              <Form.Label>Pregunta</Form.Label>
+              <Form.Label>Pedido</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Pregunta"
+                placeholder="Describe tu pedido aca"
                 name="question"
               />
             </Form.Group>
