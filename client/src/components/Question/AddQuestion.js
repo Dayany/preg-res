@@ -4,7 +4,7 @@ import { Form, Button, Row } from "react-bootstrap";
 class AddQuestion extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { email: null };
+    this.state = { email: null , question: null};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,9 +26,11 @@ class AddQuestion extends React.Component {
     };
     fetch("http://localhost:8080/question/add", requestOptions)
       .then(function (response) {
+        
         return response.json();
       })
       .then(function (body) {});
+      
   }
   render() {
     return (
@@ -45,6 +47,7 @@ class AddQuestion extends React.Component {
                 type="email"
                 placeholder="Permite respuestas privadas."
                 name="email"
+                value={this.state.email}
               />
             </Form.Group>
 
@@ -54,6 +57,7 @@ class AddQuestion extends React.Component {
                 type="text"
                 placeholder="Describe tu pedido aca"
                 name="question"
+                value={ this.state.question }
               />
             </Form.Group>
             <center>

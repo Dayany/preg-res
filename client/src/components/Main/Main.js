@@ -22,15 +22,19 @@ function Main() {
       <Categories />
       <div>
         {questions.map((question) => (
-          <h3 key={question._id}>
-            <Link
-              key={question._id}
-              to={{ pathname: `/question`, state: { question } }}
-            >
-              {" "}
-              {question.text}
-            </Link>
-          </h3>
+          <div style={{ margin: "5px" }} class="card border-primary h-100">
+            <div class="card-body d-flex flex-column align-items-start">
+              <h4 class="card-title text-primary ng-binding" key={question._id}>
+                <Link
+                  key={question._id}
+                  to={{ pathname: `/question`, state: { question } }}
+                >
+                  {" "}
+                  {question.text}
+                </Link>
+              </h4>
+            </div>
+          </div>
         ))}
       </div>
     </React.Fragment>
