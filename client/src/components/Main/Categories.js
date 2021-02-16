@@ -6,11 +6,11 @@ class Categories extends React.Component {
     return (
       <Row>
         <Breadcrumb style={{ padding: "10px" }} class="text-center">
-          <Breadcrumb.Item>Todos</Breadcrumb.Item>
-          <Breadcrumb.Item>Personas</Breadcrumb.Item>
-          <Breadcrumb.Item>Productos</Breadcrumb.Item>
-          <Breadcrumb.Item>Divisas</Breadcrumb.Item>
-          <Breadcrumb.Item>Trabajos</Breadcrumb.Item>
+          <Breadcrumb.Item href="#">Todos</Breadcrumb.Item>
+          <Breadcrumb.Item href="#people">Personas</Breadcrumb.Item>
+          <Breadcrumb.Item href="#products">Productos</Breadcrumb.Item>
+          <Breadcrumb.Item href="#currency">Divisas</Breadcrumb.Item>
+          <Breadcrumb.Item href="#jobs">Trabajos</Breadcrumb.Item>
         </Breadcrumb>
       </Row>
     );
