@@ -22,9 +22,9 @@ function Main() {
       <Categories />
       <div>
         {questions.map((question) => (
-          <div style={{ margin: "5px" }} class="card border-primary h-100">
+          <div style={{ margin: "5px" }} class="card border-primary h-100" key={question._id}>
             <div class="card-body d-flex flex-column align-items-start">
-              <h4 class="card-title text-primary ng-binding" key={question._id}>
+              <h4 class="card-title text-primary ng-binding">
                 <Link
                   key={question._id}
                   to={{ pathname: `/question`, state: { question } }}
