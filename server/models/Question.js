@@ -16,6 +16,10 @@ const questionSchema = mongoose.Schema({
   email: {
     type: String,
   },
+  category:{
+    type: Number,
+    default: 0,
+  },
   answers: [
     {
       text: String,

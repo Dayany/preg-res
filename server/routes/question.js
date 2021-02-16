@@ -8,6 +8,7 @@ router.post("/add", async (req, res) => {
   const question = new Question({
     text: req.body.text,
     email: req.body.email,
+    category: req.body.category,
   });
 
   try {
