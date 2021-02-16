@@ -1,6 +1,7 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import AddAnswer from "../Answer/AddAnswer";
+import { loadState, saveState } from "../../localStorage";
 
 //View for a single question.
 //Display answers if any
@@ -11,15 +12,20 @@ class ViewQuestion extends React.Component {
     // if (!this.props.location.state) {
     //   this.setState({ redirect: true });
     // } else {
-    this.state = {
-      answers: this.props.location.state.question.answers,
-    };
+    if (loadState()) {
+      this.state = loadState();
+    } else {
+      this.state = {
+        answers: this.props.location.state.question.answers,
+      };
+    }
     // }
     this.updateAnswers = this.updateAnswers;
   }
   updateAnswers = (answer) => {
     const newAnswers = this.state.answers.concat(answer);
     this.setState({ answers: newAnswers });
+    saveState({ answers: newAnswers });
   };
 
   render() {
@@ -46,10 +52,13 @@ class ViewQuestion extends React.Component {
 
           <div>
             {this.state.answers.map((answer) => (
-              <div style={{ margin: "5px" }} class="card border-primary h-100" key={answer._id}>
+              <div
+                style={{ margin: "5px" }}
+                class="card border-primary h-100"
+                key={answer._id}
+              >
                 <div class="card-body d-flex flex-column align-items-start">
-                  <h4
-                    class="card-title text-primary ng-binding">
+                  <h4 class="card-title text-primary ng-binding">
                     <p class="card-text">{answer.text}</p>
                   </h4>
                 </div>
