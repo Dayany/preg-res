@@ -51,11 +51,11 @@ class ViewQuestion extends React.Component {
           />
 
           <div>
-            {this.state.answers.map((answer) => (
+            {this.state.answers.slice(0).reverse().map((answer, i) => (
               <div
                 style={{ margin: "5px" }}
                 class="card border-primary h-100"
-                key={answer._id}
+                key={i}
               >
                 <div class="card-body d-flex flex-column align-items-start">
                   <h4 class="card-title text-primary ng-binding">
