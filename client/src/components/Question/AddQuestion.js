@@ -24,7 +24,7 @@ class AddQuestion extends React.Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     };
-    fetch("http://localhost:8080/question/add", requestOptions)
+    fetch( process.env.REACT_APP_DB_URL + "/question/add", requestOptions)
       .then(function (response) {
         
         return response.json();

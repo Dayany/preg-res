@@ -12,7 +12,7 @@ function Main() {
 
   const [questions, setQuestions] = useState([]);
   const fetchQuestions = async () => {
-    const data = await fetch("http://localhost:8080/question");
+    const data = await fetch(process.env.REACT_APP_DB_URL + "/question");
     const questions = await data.json();
     setQuestions(questions);
   };
