@@ -21,7 +21,7 @@ class AddAnswer extends React.Component {
       body: JSON.stringify(data),
     };
     fetch(
-      `http://localhost:8080/question/addanswer/${event.target.questionId.value}`,
+      process.env.REACT_APP_DB_URL + `/question/addanswer/${event.target.questionId.value}`,
       requestOptions
     )
       .then(function (response) {
