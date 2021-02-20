@@ -21,16 +21,14 @@ class AddAnswer extends React.Component {
       body: JSON.stringify(data),
     };
     fetch(
-      process.env.REACT_APP_DB_URL + `/question/addanswer/${event.target.questionId.value}`,
+      process.env.REACT_APP_DB_URL +
+        `/question/addanswer/${event.target.questionId.value}`,
       requestOptions
-    )
-      .then((response) => {
-        return response.json().then((data) => (
-          this.props.updateAnswerChild(data.answers),{}
-        ));
-      })
-      .then((body) => {
-      })
+    ).then((response) => {
+      return response
+        .json()
+        .then((data) => (this.props.updateAnswerChild(data.answers), {}));
+    });
   }
   render() {
     return (
@@ -51,7 +49,11 @@ class AddAnswer extends React.Component {
             </Form.Group>
             <Form.Group controlId="formBasicAddAnswer">
               <Form.Label>Respuesta</Form.Label>
-              <Form.Control as="textarea" placeholder="Escriba su respuesta aca" name="answer" />
+              <Form.Control
+                as="textarea"
+                placeholder="Escriba su respuesta aca"
+                name="answer"
+              />
             </Form.Group>
             <Form.Group controlId="formBasicCheckbox">
               <Form.Check type="checkbox" label="Respuesta privada?" />

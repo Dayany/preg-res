@@ -32,13 +32,11 @@ class AddQuestion extends React.Component {
       body: JSON.stringify(data),
     };
     fetch(process.env.REACT_APP_DB_URL + "/question/add", requestOptions)
-      .then(function (response) {
-        return response.json().then((data) => ({
-          data: data,
-        }));
+      .then((response) => {
+        return response
+          .json()
+          .then((data) => (this.props.setQuestionsChild(data), {}));
       })
-      .then(function (body) {});
-      this.props.setQuestionsChild(data);
   }
   render() {
     return (
@@ -55,14 +53,14 @@ class AddQuestion extends React.Component {
                 type="email"
                 placeholder="Permite respuestas privadas."
                 name="email"
-                value={this.state.email ? this.state.email  : undefined }
+                value={this.state.email ? this.state.email : undefined}
               />
             </Form.Group>
             <Form.Group controlId="formBasicCategory">
               <Form.Label>Categoria:</Form.Label>
               <Form.Control
                 name="category"
-                value={this.state.category ? this.state.category  : undefined }
+                value={this.state.category ? this.state.category : undefined}
                 as="select"
               >
                 <option key="0">Todos</option>
@@ -78,7 +76,7 @@ class AddQuestion extends React.Component {
                 type="text"
                 placeholder="Describe tu pedido aca"
                 name="question"
-                value={this.state.question ? this.state.question : undefined }
+                value={this.state.question ? this.state.question : undefined}
               />
             </Form.Group>
             <center>
