@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import React from "react";
 import AddQuestion from "../Question/AddQuestion.js";
 import Categories from "./Categories.js";
+import CardQuestion from "../Question/CardQuestion.js";
 
 const { useEffect, useState } = require("react");
 
@@ -26,22 +26,9 @@ function Main() {
       <AddQuestion setQuestionsChild={updateQuestions} />
       <Categories />
       <div>
-        {questions.map((question, i) => (
-          <div
-            style={{ margin: "5px" }}
-            class="card border-primary h-100"
-            key={i}
-          >
-            <div class="card-body d-flex flex-column align-items-start" key={i}>
-              <h4 class="card-title text-primary ng-binding" key={i}>
-                <Link
-                  key={i}
-                  to={{ pathname: `/question`, state: { question } }}
-                >
-                  {question.text}
-                </Link>
-              </h4>
-            </div>
+        {questions.map((question) => (
+          <div key={question._id}>
+            <CardQuestion state={question} />
           </div>
         ))}
       </div>

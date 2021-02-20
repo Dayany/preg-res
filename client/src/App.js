@@ -9,7 +9,7 @@ import React from "react";
 function App() {
   return (
     <React.Fragment>
-      <section class="jumbotron text-center">
+      <section className="jumbotron text-center">
         <Container>
           <Router>
             <Switch>

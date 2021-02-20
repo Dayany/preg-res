@@ -5,7 +5,7 @@ class Categories extends React.Component {
   render() {
     return (
       <Row>
-        <Breadcrumb style={{ padding: "10px" }} class="text-center">
+        <Breadcrumb style={{ padding: "10px" }} className="text-center">
           <Breadcrumb.Item href="#">Todos</Breadcrumb.Item>
           <Breadcrumb.Item href="#people">Personas</Breadcrumb.Item>
           <Breadcrumb.Item href="#products">Productos</Breadcrumb.Item>

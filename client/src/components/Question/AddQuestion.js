@@ -43,7 +43,7 @@ class AddQuestion extends React.Component {
   render() {
     return (
       <Row>
-        <div class="col-md-12">
+        <div className="col-md-12">
           <Form
             style={{ padding: "15px" }}
             className="card bg-primary text-white "
@@ -55,14 +55,14 @@ class AddQuestion extends React.Component {
                 type="email"
                 placeholder="Permite respuestas privadas."
                 name="email"
-                value={this.state.email}
+                value={this.state.email ? this.state.email  : undefined }
               />
             </Form.Group>
             <Form.Group controlId="formBasicCategory">
               <Form.Label>Categoria:</Form.Label>
               <Form.Control
                 name="category"
-                value={this.state.category}
+                value={this.state.category ? this.state.category  : undefined }
                 as="select"
               >
                 <option key="0">Todos</option>
@@ -78,7 +78,7 @@ class AddQuestion extends React.Component {
                 type="text"
                 placeholder="Describe tu pedido aca"
                 name="question"
-                value={this.state.question}
+                value={this.state.question ? this.state.question : undefined }
               />
             </Form.Group>
             <center>

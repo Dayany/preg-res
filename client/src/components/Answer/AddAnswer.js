@@ -36,7 +36,7 @@ class AddAnswer extends React.Component {
   render() {
     return (
       <Row>
-        <div class="col-md-12">
+        <div className="col-md-12">
           <Form
             style={{ padding: "15px" }}
             className="card bg-primary text-white "
