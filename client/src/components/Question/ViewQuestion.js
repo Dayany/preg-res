@@ -15,14 +15,10 @@ class ViewQuestion extends React.Component {
     this.state = {
       answers: this.props.location.state.question.answers,
     };
-    // }
-    // console.log(this.state);
-    // }
     this.updateAnswers = this.updateAnswers.bind(this);
   }
   updateAnswers = (answer) => {
-    const newAnswers = this.state.answers.concat(answer);
-    this.setState({ answers: newAnswers });
+    this.setState({ answers: answer });
     // saveState({ answers: newAnswers });
   };
 

@@ -24,14 +24,13 @@ class AddAnswer extends React.Component {
       process.env.REACT_APP_DB_URL + `/question/addanswer/${event.target.questionId.value}`,
       requestOptions
     )
-      .then(function (response) {
-        return response.json().then((data) => ({
-          data: data,
-        }));
+      .then((response) => {
+        return response.json().then((data) => (
+          this.props.updateAnswerChild(data.answers),{}
+        ));
       })
-      .then(function (body) {});
-
-    this.props.updateAnswerChild({ _id: "Newid", text: data.text });
+      .then((body) => {
+      })
   }
   render() {
     return (
