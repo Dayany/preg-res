@@ -4,10 +4,10 @@ import { Form, Button, Row } from "react-bootstrap";
 class AddQuestion extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      email: null, 
+    this.state = {
+      email: null,
       question: null,
-      category: null
+      category: null,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -25,7 +25,7 @@ class AddQuestion extends React.Component {
       email: event.target.email.value,
       category: parseInt(event.target.category.options.selectedIndex),
     };
-    
+
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -33,10 +33,12 @@ class AddQuestion extends React.Component {
     };
     fetch(process.env.REACT_APP_DB_URL + "/question/add", requestOptions)
       .then(function (response) {
-        
-        return response.json();
+        return response.json().then((data) => ({
+          data: data,
+        }));
       })
       .then(function (body) {});
+      this.props.setQuestionsChild(data);
   }
   render() {
     return (
@@ -58,12 +60,16 @@ class AddQuestion extends React.Component {
             </Form.Group>
             <Form.Group controlId="formBasicCategory">
               <Form.Label>Categoria:</Form.Label>
-              <Form.Control name="category" value={this.state.category} as="select">
-                  <option key="0">Todos</option>
-                  <option key="1">Personas</option>
-                  <option key="2">Productos</option>
-                  <option key="3">Divisas</option>
-                  <option key="4">Trabajos</option>
+              <Form.Control
+                name="category"
+                value={this.state.category}
+                as="select"
+              >
+                <option key="0">Todos</option>
+                <option key="1">Personas</option>
+                <option key="2">Productos</option>
+                <option key="3">Divisas</option>
+                <option key="4">Trabajos</option>
               </Form.Control>
             </Form.Group>
             <Form.Group controlId="formBasicQuestion">

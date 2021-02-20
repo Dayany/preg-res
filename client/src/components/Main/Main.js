@@ -16,20 +16,28 @@ function Main() {
     const questions = await data.json();
     setQuestions(questions);
   };
+
+  const updateQuestions = (question) => {
+    const newQuestions = [question].concat(questions);
+    setQuestions(newQuestions);
+  };
   return (
     <React.Fragment>
-      <AddQuestion />
+      <AddQuestion setQuestionsChild={updateQuestions} />
       <Categories />
       <div>
-        {questions.map((question) => (
-          <div style={{ margin: "5px" }} class="card border-primary h-100" key={question._id}>
-            <div class="card-body d-flex flex-column align-items-start">
-              <h4 class="card-title text-primary ng-binding">
+        {questions.map((question, i) => (
+          <div
+            style={{ margin: "5px" }}
+            class="card border-primary h-100"
+            key={i}
+          >
+            <div class="card-body d-flex flex-column align-items-start" key={i}>
+              <h4 class="card-title text-primary ng-binding" key={i}>
                 <Link
-                  key={question._id}
+                  key={i}
                   to={{ pathname: `/question`, state: { question } }}
                 >
-                  {" "}
                   {question.text}
                 </Link>
               </h4>
