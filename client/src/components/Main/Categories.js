@@ -6,11 +6,16 @@ class Categories extends React.Component {
     return (
       <Row>
         <Breadcrumb style={{ padding: "10px" }} className="text-center">
-          <Breadcrumb.Item href="#">Todos</Breadcrumb.Item>
-          <Breadcrumb.Item href="#people">Personas</Breadcrumb.Item>
-          <Breadcrumb.Item href="#products">Productos</Breadcrumb.Item>
-          <Breadcrumb.Item href="#currency">Divisas</Breadcrumb.Item>
-          <Breadcrumb.Item href="#jobs">Trabajos</Breadcrumb.Item>
+          {this.props.categoriesList.map((category, key) => (
+            <Breadcrumb.Item
+              onClick={() => {
+                this.props.setNewCategoryChild(key);
+              }}
+              href="#"
+            >
+              {category}
+            </Breadcrumb.Item>
+          ))}
         </Breadcrumb>
       </Row>
     );

@@ -31,12 +31,13 @@ class AddQuestion extends React.Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     };
-    fetch(process.env.REACT_APP_DB_URL + "/question/add", requestOptions)
-      .then((response) => {
+    fetch(process.env.REACT_APP_DB_URL + "/question/add", requestOptions).then(
+      (response) => {
         return response
           .json()
           .then((data) => (this.props.setQuestionsChild(data), {}));
-      })
+      }
+    );
   }
   render() {
     return (
@@ -63,11 +64,9 @@ class AddQuestion extends React.Component {
                 value={this.state.category ? this.state.category : undefined}
                 as="select"
               >
-                <option key="0">Todos</option>
-                <option key="1">Personas</option>
-                <option key="2">Productos</option>
-                <option key="3">Divisas</option>
-                <option key="4">Trabajos</option>
+                {this.props.categoriesList.map((category, key) => (
+                  <option key="{key}">{category}</option>
+                ))}
               </Form.Control>
             </Form.Group>
             <Form.Group controlId="formBasicQuestion">

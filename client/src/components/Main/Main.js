@@ -11,14 +11,26 @@ function Main() {
     fetchQuestions();
   }, []);
 
-  const [questions, setQuestions] = useState([]);
-  const [pageNumber, setPageNumber] = useState(1);
-  const questionsPerPage = 10;
-  const pagesVisited = (pageNumber - 1) * questionsPerPage;
-  const pageCount = Math.ceil(questions.length / questionsPerPage);
-  
+  const categories = ["Todos", "Personas", "Productos", "Divisas", "Trabajos"];
 
-  const displayQuestionsWithPagination = questions
+  const [questions, setQuestions] = useState([]);
+  const [state, setState] = useState({ category: 0, pageNumber: 1 });
+  const questionsPerPage = 10;
+  let pagesVisited = (state.pageNumber - 1) * questionsPerPage;
+  let pageCount = Math.ceil(questions.length / questionsPerPage);
+
+  const filterQuestions = (questionsToFilter) => {
+    const filteredQuestions = questionsToFilter.filter((question) => {
+      if (state.category === 0) return question;
+      return question.category === state.category;
+    });
+
+    pageCount = Math.ceil(filteredQuestions.length / questionsPerPage);
+
+    return filteredQuestions;
+  };
+
+  const displayQuestionsWithPagination = filterQuestions(questions)
     .slice(pagesVisited, pagesVisited + questionsPerPage)
     .map((question) => {
       return (
@@ -39,18 +51,23 @@ function Main() {
     setQuestions(newQuestions);
   };
 
-  const handlePageChange = selected => {
-    setPageNumber(selected);
+  const handlePageChange = (selected) => {
+    setState({ ...state, pageNumber: selected });
   };
+
+  const handleSetNewCategory = (selected) => {
+    setState({ ...state, category: selected, pageNumber: 1 });
+  };
+
   return (
     <React.Fragment>
-      <AddQuestion setQuestionsChild={updateQuestions} />
-      <Categories />
+      <AddQuestion categoriesList={categories} setQuestionsChild={updateQuestions} />
+      <Categories categoriesList={categories} setNewCategoryChild={handleSetNewCategory} />
       {displayQuestionsWithPagination}
       <Pagination
         itemClass="page-item"
         linkClass="page-link"
-        activePage={pageNumber}
+        activePage={state.pageNumber}
         itemsCountPerPage={questionsPerPage}
         totalItemsCount={questions.length}
         pageRangeDisplayed={pageCount}
