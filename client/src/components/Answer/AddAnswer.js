@@ -1,16 +1,41 @@
 import React from "react";
 import { Form, Button, Row } from "react-bootstrap";
+import emailjs from "emailjs-com";
 
 class AddAnswer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { answer: null };
+    this.state = { answer: null, isChecked: false };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.toggleCheckbox = this.toggleCheckbox.bind(this);
+  }
+
+  sendEmail(e) {
+    e.preventDefault();
+    emailjs
+      .sendForm(
+        process.env.REACT_APP_EMAIL_SERVICE_ID,
+        process.env.REACT_APP_EMAIL_TEMPLATE_ID,
+        e.target,
+        process.env.REACT_APP_EMAIL_USER_ID
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+    e.target.reset();
   }
 
   handleSubmit(event) {
     event.preventDefault();
+    event.target.email.value = this.props.state.email;
+
+    if(this.state.isChecked) return this.sendEmail(event);
 
     const data = {
       text: event.target.answer.value,
@@ -30,6 +55,10 @@ class AddAnswer extends React.Component {
         .then((data) => (this.props.updateAnswerChild(data.answers), {}));
     });
   }
+  toggleCheckbox() {
+    return this.setState({ isChecked: !this.state.isChecked });
+  }
+
   render() {
     return (
       <Row>
@@ -43,8 +72,14 @@ class AddAnswer extends React.Component {
               <Form.Control
                 style={{ display: "none" }}
                 type="text"
-                defaultValue={this.props.state}
+                defaultValue={this.props.state._id}
                 name="questionId"
+              />
+              <Form.Control
+                style={{ display: "none" }}
+                type="text"
+                defaultValue=""
+                name="email"
               />
             </Form.Group>
             <Form.Group controlId="formBasicAddAnswer">
@@ -55,16 +90,24 @@ class AddAnswer extends React.Component {
                 name="answer"
               />
             </Form.Group>
+            {this.props.state.email? 
             <Form.Group controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Respuesta privada?" />
+              <Form.Check
+                type="checkbox"
+                label="Respuesta privada?"
+                name="sendEmail"
+                defaultChecked={this.state.isChecked}
+                onChange={this.toggleCheckbox}
+              />
             </Form.Group>
+            : null}
             <center>
               <Button
                 className="btn btn-primary border-white mt-auto"
                 variant="primary"
                 type="submit"
               >
-                Submit
+                Responde
               </Button>
             </center>
           </Form>

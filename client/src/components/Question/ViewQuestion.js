@@ -19,7 +19,6 @@ class ViewQuestion extends React.Component {
   }
   updateAnswers = (answer) => {
     this.setState({ answers: answer });
-    // saveState({ answers: newAnswers });
   };
 
   render() {
@@ -40,7 +39,7 @@ class ViewQuestion extends React.Component {
         <div>
           <AddAnswer
             updateAnswerChild={this.updateAnswers}
-            state={this.props.location.state.question._id}
+            state={this.props.location.state.question}
           />
         </div>
         <div>
