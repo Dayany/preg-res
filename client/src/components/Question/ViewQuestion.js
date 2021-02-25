@@ -1,6 +1,5 @@
 import React from "react";
 import AddAnswer from "../Answer/AddAnswer";
-import { loadState, saveState } from "../../localStorage";
 import CardAnswer from "../Answer/CardAnswer";
 
 //View for a single question.
@@ -9,9 +8,6 @@ class ViewQuestion extends React.Component {
   constructor(props) {
     super(props);
 
-    // if (loadState()) {
-    //   this.state = loadState();
-    // } else {
     this.state = {
       answers: this.props.location.state.question.answers,
     };
