@@ -8,6 +8,7 @@ class Categories extends React.Component {
         <Breadcrumb style={{ padding: "10px" }} className="text-center">
           {this.props.categoriesList.map((category, key) => (
             <Breadcrumb.Item
+              id={key}
               onClick={() => {
                 this.props.setNewCategoryChild(key);
               }}

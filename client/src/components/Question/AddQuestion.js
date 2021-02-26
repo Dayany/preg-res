@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, Button, Row } from "react-bootstrap";
+import { FormattedMessage, useIntl } from "react-intl";
 
 class AddQuestion extends React.Component {
   constructor(props) {
@@ -49,34 +50,50 @@ class AddQuestion extends React.Component {
             onSubmit={this.handleSubmit}
           >
             <Form.Group controlId="formBasicEmail">
-              <Form.Label>Direccion Email (Opcional):</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Permite respuestas privadas."
-                name="email"
-                value={this.state.email ? this.state.email : undefined}
-              />
+              <Form.Label>
+                <FormattedMessage id="PregRes.emailAddressOptional" />:
+              </Form.Label>
+              <FormattedMessage id="PregRes.permitsPrivateAnswer">
+                {(placeholder) => (
+                  <Form.Control
+                    type="email"
+                    placeholder={placeholder}
+                    name="email"
+                    value={this.state.email ? this.state.email : undefined}
+                  />
+                )}
+              </FormattedMessage>
             </Form.Group>
             <Form.Group controlId="formBasicCategory">
-              <Form.Label>Categoria:</Form.Label>
+              <Form.Label>
+                <FormattedMessage id="PregRes.category" />:
+              </Form.Label>
               <Form.Control
                 name="category"
                 value={this.state.category ? this.state.category : undefined}
                 as="select"
               >
                 {this.props.categoriesList.map((category, key) => (
-                  <option key="{key}">{category}</option>
+                  <option key={key}>{category}</option>
                 ))}
               </Form.Control>
             </Form.Group>
             <Form.Group controlId="formBasicQuestion">
-              <Form.Label>Pedido:</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Describe tu pedido aca"
-                name="question"
-                value={this.state.question ? this.state.question : undefined}
-              />
+              <Form.Label>
+                <FormattedMessage id="PregRes.question" />:
+              </Form.Label>
+              <FormattedMessage id="PregRes.permitsPrivateAnswer">
+                {(placeholder) => (
+                  <Form.Control
+                    type="text"
+                    placeholder={placeholder}
+                    name="question"
+                    value={
+                      this.state.question ? this.state.question : undefined
+                    }
+                  />
+                )}
+              </FormattedMessage>
             </Form.Group>
             <center>
               <Button
@@ -84,7 +101,7 @@ class AddQuestion extends React.Component {
                 variant="primary"
                 type="submit"
               >
-                Submit
+                <FormattedMessage id="PregRes.submit" />
               </Button>
             </center>
           </Form>

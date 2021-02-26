@@ -1,4 +1,5 @@
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import AddAnswer from "../Answer/AddAnswer";
 import CardAnswer from "../Answer/CardAnswer";
 
@@ -21,9 +22,14 @@ class ViewQuestion extends React.Component {
     return (
       <React.Fragment>
         <div>
-          <h1 className="card-title text-primary ng-binding">Pedido:</h1>
+          <h1 className="card-title text-primary ng-binding">
+            <FormattedMessage id="PregRes.question" />:
+          </h1>
         </div>
-        <div className="card border-primary h-100" style={{marginBottom: "5px"}}>
+        <div
+          className="card border-primary h-100"
+          style={{ marginBottom: "5px" }}
+        >
           <div className="card-body d-flex flex-column align-items-start">
             <div className="col-xl-12 col-lg-4 mb-4">
               <p className="card-text" style={{ paddingTop: "10px" }}>

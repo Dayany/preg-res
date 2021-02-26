@@ -3,6 +3,7 @@ import AddQuestion from "../Question/AddQuestion.js";
 import Categories from "./Categories.js";
 import CardQuestion from "../Question/CardQuestion.js";
 import Pagination from "react-js-pagination";
+import { useIntl } from "react-intl";
 
 const { useEffect, useState } = require("react");
 
@@ -11,7 +12,15 @@ function Main() {
     fetchQuestions();
   }, []);
 
-  const categories = ["Todos", "Personas", "Productos", "Divisas", "Trabajos"];
+  const intl = useIntl();
+
+  const categories = [
+    intl.formatMessage({id: 'PregRes.all'}),
+    intl.formatMessage({id: 'PregRes.people'}),
+    intl.formatMessage({id: 'PregRes.products'}),
+    intl.formatMessage({id: 'PregRes.currency'}),
+    intl.formatMessage({id: 'PregRes.jobs'})
+  ];
 
   const [questions, setQuestions] = useState([]);
   const [state, setState] = useState({ category: 0, pageNumber: 1 });
@@ -61,8 +70,14 @@ function Main() {
 
   return (
     <React.Fragment>
-      <AddQuestion categoriesList={categories} setQuestionsChild={updateQuestions} />
-      <Categories categoriesList={categories} setNewCategoryChild={handleSetNewCategory} />
+      <AddQuestion
+        categoriesList={categories}
+        setQuestionsChild={updateQuestions}
+      />
+      <Categories
+        categoriesList={categories}
+        setNewCategoryChild={handleSetNewCategory}
+      />
       {displayQuestionsWithPagination}
       <Pagination
         itemClass="page-item"

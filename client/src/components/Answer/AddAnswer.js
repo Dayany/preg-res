@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Button, Row } from "react-bootstrap";
 import emailjs from "emailjs-com";
+import { FormattedMessage } from "react-intl";
 
 class AddAnswer extends React.Component {
   constructor(props) {
@@ -35,7 +36,7 @@ class AddAnswer extends React.Component {
     event.preventDefault();
     event.target.email.value = this.props.state.email;
 
-    if(this.state.isChecked) return this.sendEmail(event);
+    if (this.state.isChecked) return this.sendEmail(event);
 
     const data = {
       text: event.target.answer.value,
@@ -83,31 +84,41 @@ class AddAnswer extends React.Component {
               />
             </Form.Group>
             <Form.Group controlId="formBasicAddAnswer">
-              <Form.Label>Respuesta</Form.Label>
-              <Form.Control
-                as="textarea"
-                placeholder="Escriba su respuesta aca"
-                name="answer"
-              />
+              <Form.Label>
+                <FormattedMessage id="PregRes.answer" />
+              </Form.Label>
+              <FormattedMessage id="PregRes.writeAnswerHere">
+                {(placeholder) => (
+                  <Form.Control
+                    as="textarea"
+                    placeholder={placeholder}
+                    name="answer"
+                  />
+                )}
+              </FormattedMessage>
             </Form.Group>
-            {this.props.state.email? 
-            <Form.Group controlId="formBasicCheckbox">
-              <Form.Check
-                type="checkbox"
-                label="Respuesta privada?"
-                name="sendEmail"
-                defaultChecked={this.state.isChecked}
-                onChange={this.toggleCheckbox}
-              />
-            </Form.Group>
-            : null}
+            {this.props.state.email ? (
+              <Form.Group controlId="formBasicCheckbox">
+                <FormattedMessage id="PregRes.privateAnswer">
+                  {(label) => (
+                    <Form.Check
+                      type="checkbox"
+                      name="sendEmail"
+                      label={label}
+                      defaultChecked={this.state.isChecked}
+                      onChange={this.toggleCheckbox}
+                    />
+                  )}
+                </FormattedMessage>
+              </Form.Group>
+            ) : null}
             <center>
               <Button
                 className="btn btn-primary border-white mt-auto"
                 variant="primary"
                 type="submit"
               >
-                Responde
+                <FormattedMessage id="PregRes.answer" />
               </Button>
             </center>
           </Form>

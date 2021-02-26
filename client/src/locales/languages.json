@@ -1,0 +1,33 @@
+{
+    "en": {
+      "PregRes.all": "All",
+      "PregRes.people": "People",
+      "PregRes.products": "Products",
+      "PregRes.currency": "Currency",
+      "PregRes.jobs": "Jobs",
+      "PregRes.category": "Category",
+      "PregRes.question": "Question",
+      "PregRes.emailAddressOptional": "Email Address (Optional)",
+      "PregRes.permitsPrivateAnswer": "Permits private answers",
+      "PregRes.submit": "Submit",
+      "PregRes.answer": "Answer",
+      "PregRes.privateAnswer": "Answer privately",
+      "PregRes.writeAnswerHere": "Write your answer here"
+      
+    },
+    "es": {
+      "PregRes.all": "Todos",
+      "PregRes.people": "Personas",
+      "PregRes.products": "Productos",
+      "PregRes.currency": "Divisas",
+      "PregRes.jobs": "Trabajos",
+      "PregRes.category": "Categoria",
+      "PregRes.question": "Pregunta",
+      "PregRes.emailAddressOptional": "Direccion de email (Opcional)",
+      "PregRes.permitsPrivateAnswer": "Permite respuestas privadas",
+      "PregRes.submit": "Submit",
+      "PregRes.answer": "Answer",
+      "PregRes.privateAnswer": "Answer privately",
+      "PregRes.writeAnswerHere": "Write your answer here"
+    }
+  }
