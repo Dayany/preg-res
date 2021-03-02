@@ -18,7 +18,7 @@ mongoose.connect(
   () => console.log("Connected")
 );
 
-app.use("/question", questionRoute);
+app.use("/questions", questionRoute);
 
 app.listen(8080, () =>
   console.log("API is running on http://localhost:8080/login")
