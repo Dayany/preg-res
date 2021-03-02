@@ -15,11 +15,11 @@ function Main() {
   const intl = useIntl();
 
   const categories = [
-    intl.formatMessage({id: 'PregRes.all'}),
-    intl.formatMessage({id: 'PregRes.people'}),
-    intl.formatMessage({id: 'PregRes.products'}),
-    intl.formatMessage({id: 'PregRes.currency'}),
-    intl.formatMessage({id: 'PregRes.jobs'})
+    intl.formatMessage({ id: "PregRes.all" }),
+    intl.formatMessage({ id: "PregRes.people" }),
+    intl.formatMessage({ id: "PregRes.products" }),
+    intl.formatMessage({ id: "PregRes.currency" }),
+    intl.formatMessage({ id: "PregRes.jobs" }),
   ];
 
   const [questions, setQuestions] = useState([]);
@@ -50,7 +50,7 @@ function Main() {
     });
 
   const fetchQuestions = async () => {
-    const data = await fetch(process.env.REACT_APP_DB_URL + "/question");
+    const data = await fetch(process.env.REACT_APP_DB_URL + "/questions/");
     const questions = await data.json();
     setQuestions(questions);
   };

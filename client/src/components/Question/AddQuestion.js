@@ -25,6 +25,7 @@ class AddQuestion extends React.Component {
       text: event.target.question.value,
       email: event.target.email.value,
       category: parseInt(event.target.category.options.selectedIndex),
+      answers: [],
     };
 
     const requestOptions = {
@@ -32,7 +33,7 @@ class AddQuestion extends React.Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     };
-    fetch(process.env.REACT_APP_DB_URL + "/question/add", requestOptions).then(
+    fetch(process.env.REACT_APP_DB_URL + "/questions/add", requestOptions).then(
       (response) => {
         return response
           .json()
