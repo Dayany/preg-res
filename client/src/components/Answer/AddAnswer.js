@@ -73,7 +73,7 @@ class AddAnswer extends React.Component {
               <Form.Control
                 style={{ display: "none" }}
                 type="text"
-                defaultValue={this.props.state._id}
+                defaultValue={this.props.state.id}
                 name="questionId"
               />
               <Form.Control

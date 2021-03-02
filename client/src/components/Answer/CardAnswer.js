@@ -8,7 +8,7 @@ class CardAnswer extends React.Component {
         <div
           style={{ margin: "5px" }}
           className="card border-primary h-100"
-          key={this.props.state._id}
+          key={this.props.state.id}
         >
           <div className="card-body d-flex flex-column align-items-start">
             <h4 className="card-title text-primary ng-binding">
