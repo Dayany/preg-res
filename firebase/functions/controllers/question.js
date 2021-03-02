@@ -13,7 +13,10 @@ questionApp.use(bodyParser.json());
 
 // Retrieve all questions
 questionApp.get("/", async (req, res) => {
-  const snapshot = await db.collection("questions").get();
+  const snapshot = await db
+      .collection("questions")
+      .orderBy("date", "desc")
+      .get();
   const questions = [];
   snapshot.forEach((doc) => {
     const id = doc.id;
@@ -23,7 +26,6 @@ questionApp.get("/", async (req, res) => {
       ...data,
     });
   });
-  res.set("Access-Control-Allow-Origin", "*");
   res.status(200).send(JSON.stringify(questions));
 });
 
