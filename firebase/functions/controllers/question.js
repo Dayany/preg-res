@@ -2,12 +2,14 @@ const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 const express = require("express");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 admin.initializeApp(functions.config().firebase);
 
 const db = admin.firestore();
 
 const questionApp = express();
 questionApp.use(cors({origin: true}));
+questionApp.use(bodyParser.json());
 
 // Retrieve all questions
 questionApp.get("/", async (req, res) => {
@@ -33,7 +35,7 @@ questionApp.post("/add", async (req, res) => {
     ...req.body,
   };
   await db.collection("questions").add(question);
-  res.status(201).send();
+  res.status(201).send(JSON.stringify(question));
 });
 
 questionApp.put("/addanswer/:questionId", async (req, res) => {
