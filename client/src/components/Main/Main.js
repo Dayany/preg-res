@@ -43,7 +43,7 @@ function Main() {
     .slice(pagesVisited, pagesVisited + questionsPerPage)
     .map((question) => {
       return (
-        <div key={question.id}>
+        <div key={question._id}>
           <CardQuestion state={question} />
         </div>
       );

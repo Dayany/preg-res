@@ -25,7 +25,6 @@ class AddQuestion extends React.Component {
       text: event.target.question.value,
       email: event.target.email.value,
       category: parseInt(event.target.category.options.selectedIndex),
-      answers: [],
     };
 
     const requestOptions = {

@@ -48,7 +48,7 @@ class AddAnswer extends React.Component {
     };
     fetch(
       process.env.REACT_APP_DB_URL +
-        `/question/addanswer/${event.target.questionId.value}`,
+        `/questions/addanswer/${event.target.questionId.value}`,
       requestOptions
     ).then((response) => {
       return response
@@ -73,7 +73,7 @@ class AddAnswer extends React.Component {
               <Form.Control
                 style={{ display: "none" }}
                 type="text"
-                defaultValue={this.props.state.id}
+                defaultValue={this.props.state._id}
                 name="questionId"
               />
               <Form.Control

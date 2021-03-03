@@ -49,7 +49,7 @@ class ViewQuestion extends React.Component {
             .slice(0)
             .reverse()
             .map((answer) => (
-              <div key={answer.id}>
+              <div key={answer._id}>
                 <CardAnswer state={answer} />
               </div>
             ))}
