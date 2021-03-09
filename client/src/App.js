@@ -8,6 +8,9 @@ import React, { useState } from "react";
 import { IntlProvider } from "react-intl";
 import localeData from "./locales/languages.json";
 import Header from "./components/Header/Header";
+import $ from 'jquery';
+import Popper from 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 function App() {
   //Make default language English, unless otherwise specified by the user.

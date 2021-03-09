@@ -1,4 +1,5 @@
 import React from "react";
+import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 
 class Header extends React.Component {
   constructor(props) {
@@ -8,15 +9,25 @@ class Header extends React.Component {
   render() {
     {
       return (
-        <section style={{ background: "#e9ecef" }} className="text-right">
-          <a href="#" onClick={() => this.props.setLocaleChild("en")}>
-            English
-          </a>
-          /
-          <a href="#" onClick={() => this.props.setLocaleChild("es")}>
-            Español
-          </a>
-        </section>
+        <Navbar bg="light" expand="lg">
+          <Navbar.Brand href="#">PregRes</Navbar.Brand>
+          <Navbar.Collapse className="justify-content-end">
+            <NavDropdown title="Language" id="basic-nav-dropdown">
+              <Nav.Link
+                onClick={() => this.props.setLocaleChild("en")}
+                href="#"
+              >
+                English
+              </Nav.Link>
+              <Nav.Link
+                onClick={() => this.props.setLocaleChild("es")}
+                href="#"
+              >
+                Espanol
+              </Nav.Link>
+            </NavDropdown>
+          </Navbar.Collapse>
+        </Navbar>
       );
     }
   }
