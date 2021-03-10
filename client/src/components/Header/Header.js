@@ -11,8 +11,9 @@ class Header extends React.Component {
       return (
         <Navbar bg="light" expand="lg">
           <Navbar.Brand href="#">PregRes</Navbar.Brand>
+          <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
-            <NavDropdown title="Language" id="basic-nav-dropdown">
+            <NavDropdown title="Language">
               <Nav.Link
                 onClick={() => this.props.setLocaleChild("en")}
                 href="#"
@@ -23,7 +24,7 @@ class Header extends React.Component {
                 onClick={() => this.props.setLocaleChild("es")}
                 href="#"
               >
-                Espanol
+                Español
               </Nav.Link>
             </NavDropdown>
           </Navbar.Collapse>
