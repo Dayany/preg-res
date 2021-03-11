@@ -1,8 +1,10 @@
 import React from "react";
 import { Form, Button, Row } from "react-bootstrap";
 import { FormattedMessage } from "react-intl";
+import { AuthContext } from "../Auth/Auth";
 
 class AddQuestion extends React.Component {
+  static contextType = AuthContext;
   constructor(props) {
     super(props);
     this.state = {
@@ -10,6 +12,7 @@ class AddQuestion extends React.Component {
       question: null,
       category: null,
     };
+    
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,6 +23,7 @@ class AddQuestion extends React.Component {
   }
   handleSubmit(event) {
     event.preventDefault();
+    
 
     const data = {
       text: event.target.question.value,
@@ -49,7 +53,25 @@ class AddQuestion extends React.Component {
             className="card bg-primary text-white "
             onSubmit={this.handleSubmit}
           >
-            <Form.Group controlId="formBasicEmail">
+            {this.context.currentUser ?(
+             <Form.Group controlId="formBasicEmail" style={{ display: "none" }}>
+              <Form.Label>
+                <FormattedMessage id="PregRes.emailAddressOptional" />:
+              </Form.Label>
+              <FormattedMessage id="PregRes.permitsPrivateAnswer">
+                {(placeholder) => (
+                  <Form.Control
+                    type="email"
+                    placeholder={placeholder}
+                    name="email"
+                    readOnly
+                    value={this.context.currentUser.email}
+                  />
+                )}
+              </FormattedMessage>
+            </Form.Group>
+             ) : (
+             <Form.Group controlId="formBasicEmail" >
               <Form.Label>
                 <FormattedMessage id="PregRes.emailAddressOptional" />:
               </Form.Label>
@@ -64,6 +86,8 @@ class AddQuestion extends React.Component {
                 )}
               </FormattedMessage>
             </Form.Group>
+             )
+            }
             <Form.Group controlId="formBasicCategory">
               <Form.Label>
                 <FormattedMessage id="PregRes.category" />:
