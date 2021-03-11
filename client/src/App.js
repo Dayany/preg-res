@@ -10,7 +10,6 @@ import localeData from "./locales/languages.json";
 import Header from "./components/Header/Header";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import { AuthProvider } from "./components/Auth/Auth";
-import Login from "./components/Auth/Login";
 
 function App() {
   //Make default language English, unless otherwise specified by the user.

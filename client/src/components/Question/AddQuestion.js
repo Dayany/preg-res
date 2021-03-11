@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Button, Row } from "react-bootstrap";
-import { FormattedMessage, useIntl } from "react-intl";
+import { FormattedMessage } from "react-intl";
 
 class AddQuestion extends React.Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class AddQuestion extends React.Component {
       (response) => {
         return response
           .json()
-          .then((data) => (this.props.setQuestionsChild(data), {}));
+          .then((data) => (this.props.setQuestionsChild(data)));
       }
     );
   }

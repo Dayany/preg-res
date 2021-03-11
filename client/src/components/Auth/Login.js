@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import fire from "./Base";
-import { FormattedMessage, useIntl } from "react-intl";
+import { FormattedMessage } from "react-intl";
 import { AuthContext } from "./Auth";
 import Logout from "./Logout";
 
@@ -12,13 +12,6 @@ const Login = () => {
   const [signInError, setSignInError] = useState("");
   const [signUpError, setSignUpError] = useState("");
   const [hasAccount, setHasAccount] = useState(false);
-
-  const intl = useIntl();
-
-  const clearInputs = () => {
-    setEmail("");
-    setPassword("");
-  };
 
   const clearErrors = () => {
     setSignInError("");
@@ -48,24 +41,20 @@ const Login = () => {
   };
   const toggleHasAccount = () => {
     setHasAccount(!hasAccount);
-  }
+  };
 
-  if(currentUser){
-    return(
-      <Logout />
-    )
+  if (currentUser) {
+    return <Logout />;
   }
 
   return (
-
-
     <Form>
       <h1>
-      {!hasAccount ? (
-        <FormattedMessage id="PregRes.signIn" />
-      ) : (
-        <FormattedMessage id="PregRes.signUp" />
-      )}
+        {!hasAccount ? (
+          <FormattedMessage id="PregRes.signIn" />
+        ) : (
+          <FormattedMessage id="PregRes.signUp" />
+        )}
       </h1>
       <Form.Group controlId="formEmailLogin">
         <Form.Label>
@@ -119,21 +108,29 @@ const Login = () => {
       {!hasAccount ? (
         <p>
           {signInError}
-          <br/>
-          <FormattedMessage id="PregRes.doesNotHaveAccount" /> 
-          <span> <a href="#" onClick={toggleHasAccount}><FormattedMessage id="PregRes.signUp" /></a></span>
+          <br />
+          <FormattedMessage id="PregRes.doesNotHaveAccount" />
+          <span>
+            {" "}
+            <a href="#" onClick={toggleHasAccount}>
+              <FormattedMessage id="PregRes.signUp" />
+            </a>
+          </span>
         </p>
       ) : (
         <p>
           {signUpError}
-          <br/>
-          <FormattedMessage id="PregRes.hasAccount" /> 
-          <span> <a href="#" onClick={toggleHasAccount}><FormattedMessage id="PregRes.signIn" /></a></span>
+          <br />
+          <FormattedMessage id="PregRes.hasAccount" />
+          <span>
+            {" "}
+            <a href="#" onClick={toggleHasAccount}>
+              <FormattedMessage id="PregRes.signIn" />
+            </a>
+          </span>
         </p>
       )}
-
     </Form>
-
   );
 };
 

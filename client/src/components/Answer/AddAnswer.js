@@ -53,7 +53,7 @@ class AddAnswer extends React.Component {
     ).then((response) => {
       return response
         .json()
-        .then((data) => (this.props.updateAnswerChild(data.answers), {}));
+        .then((data) => (this.props.updateAnswerChild(data.answers)));
     });
   }
   toggleCheckbox() {
