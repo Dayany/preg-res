@@ -4,7 +4,7 @@ import fire from "./Base";
 
 const Logout = () => {
   const handleLogOut = () => {
-    fire.auth().signOut();
+    fire.auth().signOut().then( window.location.href = "/");
   };
 
   return(
