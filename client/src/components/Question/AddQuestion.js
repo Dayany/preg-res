@@ -23,12 +23,14 @@ class AddQuestion extends React.Component {
   }
   handleSubmit(event) {
     event.preventDefault();
+    const userId = this.context.currentUser ? this.context.currentUser.uid : null;
     
 
     const data = {
       text: event.target.question.value,
       email: event.target.email.value,
       category: parseInt(event.target.category.options.selectedIndex),
+      userId 
     };
 
     const requestOptions = {
