@@ -48,7 +48,7 @@ class AddAnswer extends React.Component {
     };
     fetch(
       process.env.REACT_APP_DB_URL +
-        `/questions/addanswer/${event.target.questionId.value}`,
+        `/questions/addanswer/${this.props.state._id}`,
       requestOptions
     ).then((response) => {
       return response
@@ -69,13 +69,7 @@ class AddAnswer extends React.Component {
             className="card bg-primary text-white "
             onSubmit={this.handleSubmit}
           >
-            <Form.Group controlId="formBasicQuestionID">
-              <Form.Control
-                style={{ display: "none" }}
-                type="text"
-                defaultValue={this.props.state._id}
-                name="questionId"
-              />
+            <Form.Group controlId="formBasicQuestionEmail">
               <Form.Control
                 style={{ display: "none" }}
                 type="text"

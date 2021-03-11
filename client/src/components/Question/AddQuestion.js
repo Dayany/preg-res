@@ -36,7 +36,7 @@ class AddQuestion extends React.Component {
       (response) => {
         return response
           .json()
-          .then((data) => (this.props.setQuestionsChild(data)));
+          .then((data) => (this.props.setQuestionsChild(data), {}));
       }
     );
   }
