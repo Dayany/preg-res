@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Form, Button, Modal } from "react-bootstrap";
 import fire from "./Base";
+import firebase from 'firebase/app';
 import { FormattedMessage } from "react-intl";
 import { AuthContext } from "./Auth";
 import Logout from "./Logout";
@@ -22,6 +23,11 @@ const LoginModal = () => {
     setSignInError("");
     setSignUpError("");
   };
+
+  const signInWithGoogle = () =>{
+    const provider = new firebase.auth.GoogleAuthProvider();
+    fire.auth().signInWithPopup(provider);
+  }
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -152,6 +158,7 @@ const LoginModal = () => {
               <FormattedMessage id="PregRes.signUp" />
             </Button>
           )}
+            <Button className="sign-in" onClick={signInWithGoogle}>Sign in with Google</Button>
         </Modal.Footer>
       </Modal>
     </>
