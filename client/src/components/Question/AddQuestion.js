@@ -102,7 +102,7 @@ class AddQuestion extends React.Component {
               <Form.Label>
                 <FormattedMessage id="PregRes.question" />:
               </Form.Label>
-              <FormattedMessage id="PregRes.permitsPrivateAnswer">
+              <FormattedMessage id="PregRes.writeYourQuestionHere">
                 {(placeholder) => (
                   <Form.Control
                     type="text"

@@ -20,6 +20,7 @@
       "PregRes.emailAddress": "Email Address",
       "PregRes.password": "Password",
       "PregRes.permitsPrivateAnswer": "Permits private answers",
+      "PregRes.writeYourQuestionHere": "Write your question here",
       "PregRes.submit": "Submit",
       "PregRes.answer": "Answer",
       "PregRes.privateAnswer": "Answer privately",
@@ -47,9 +48,10 @@
       "PregRes.emailAddress": "Direccion de email",
       "PregRes.password": "Contraseña",
       "PregRes.permitsPrivateAnswer": "Permite respuestas privadas",
+      "PregRes.writeYourQuestionHere": "Escriba su pregunta aca",
       "PregRes.submit": "Enviar",
-      "PregRes.answer": "Answer",
-      "PregRes.privateAnswer": "Answer privately",
-      "PregRes.writeAnswerHere": "Write your answer here"
+      "PregRes.answer": "Responder",
+      "PregRes.privateAnswer": "Responder en privado",
+      "PregRes.writeAnswerHere": "Escriba su respuesta aca"
     }
   }
