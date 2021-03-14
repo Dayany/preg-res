@@ -5,13 +5,15 @@ import CardQuestion from "../Question/CardQuestion.js";
 import Pagination from "react-js-pagination";
 import { useIntl } from "react-intl";
 
-const { useEffect, useState } = require("react");
+import firebase from "firebase/app";
+import "firebase/firestore";
+import { useCollectionData } from "react-firebase-hooks/firestore";
+
+const { useState } = require("react");
+
+const firestore = firebase.firestore();
 
 function Main() {
-  useEffect(() => {
-    fetchQuestions();
-  }, []);
-
   const intl = useIntl();
 
   const categories = [
@@ -22,13 +24,17 @@ function Main() {
     intl.formatMessage({ id: "PregRes.jobs" }),
   ];
 
-  const [questions, setQuestions] = useState([]);
+  const questionsRef = firestore.collection("questions");
+  const query = questionsRef.orderBy("date");
+  const [questions] = useCollectionData(query, { idField: "id" });
+
   const [state, setState] = useState({ category: 0, pageNumber: 1 });
   const questionsPerPage = 10;
   let pagesVisited = (state.pageNumber - 1) * questionsPerPage;
-  let pageCount = Math.ceil(questions.length / questionsPerPage);
+  let pageCount = Math.ceil(questions && questions.length / questionsPerPage);
 
   const filterQuestions = (questionsToFilter) => {
+    if (!questionsToFilter) return [];
     const filteredQuestions = questionsToFilter.filter((question) => {
       if (state.category === 0) return question;
       return question.category === state.category;
@@ -40,25 +46,15 @@ function Main() {
   };
 
   const displayQuestionsWithPagination = filterQuestions(questions)
+    .reverse()
     .slice(pagesVisited, pagesVisited + questionsPerPage)
     .map((question) => {
       return (
-        <div key={question._id}>
+        <div key={question.id}>
           <CardQuestion state={question} />
         </div>
       );
     });
-
-  const fetchQuestions = async () => {
-    const data = await fetch(process.env.REACT_APP_DB_URL + "/questions/");
-    const questions = await data.json();
-    setQuestions(questions);
-  };
-
-  const updateQuestions = (question) => {
-    const newQuestions = [question].concat(questions);
-    setQuestions(newQuestions);
-  };
 
   const handlePageChange = (selected) => {
     setState({ ...state, pageNumber: selected });
@@ -70,10 +66,7 @@ function Main() {
 
   return (
     <React.Fragment>
-      <AddQuestion
-        categoriesList={categories}
-        setQuestionsChild={updateQuestions}
-      />
+      <AddQuestion categoriesList={categories} questionsRef={questionsRef} />
       <Categories
         categoriesList={categories}
         setNewCategoryChild={handleSetNewCategory}
@@ -84,7 +77,7 @@ function Main() {
         linkClass="page-link"
         activePage={state.pageNumber}
         itemsCountPerPage={questionsPerPage}
-        totalItemsCount={questions.length}
+        totalItemsCount={questions && questions.length}
         pageRangeDisplayed={pageCount}
         onChange={handlePageChange}
       />

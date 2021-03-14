@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 class CardQuestion extends React.Component {
-
   render() {
     return (
       <React.Fragment>
@@ -23,7 +22,10 @@ class CardQuestion extends React.Component {
                 key={this.props.state.id}
                 to={{
                   pathname: `/question`,
-                  state: { question: this.props.state },
+                  state: {
+                    question: this.props.state,
+                    firestore: this.props.firestore,
+                  },
                 }}
               >
                 {this.props.state.text}

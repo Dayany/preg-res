@@ -3,60 +3,49 @@ import { FormattedMessage } from "react-intl";
 import AddAnswer from "../Answer/AddAnswer";
 import CardAnswer from "../Answer/CardAnswer";
 
-//View for a single question.
-//Display answers if any
-class ViewQuestion extends React.Component {
-  constructor(props) {
-    super(props);
+import firebase from "firebase/app";
+import { useDocumentData } from "react-firebase-hooks/firestore";
 
-    this.state = {
-      answers: this.props.location.state.question.answers,
-    };
-    this.updateAnswers = this.updateAnswers.bind(this);
-  }
-  updateAnswers = (answer) => {
-    this.setState({ answers: answer });
-  };
+function ViewQuestion(props) {
+  const firestore = firebase.firestore();
 
-  render() {
-    return (
-      <React.Fragment>
-        <div>
-          <h1 className="card-title text-primary ng-binding">
-            <FormattedMessage id="PregRes.question" />:
-          </h1>
-        </div>
-        <div
-          className="card border-primary h-100"
-          style={{ marginBottom: "5px" }}
-        >
-          <div className="card-body d-flex flex-column align-items-start">
-            <div className="col-xl-12 col-lg-4 mb-4">
-              <p className="card-text" style={{ paddingTop: "10px" }}>
-                {this.props.location.state.question.text}
-              </p>
-            </div>
+  const questionsRef = firestore.collection("questions");
+  const query = questionsRef.doc(props.location.state.question.id);
+  const [question] = useDocumentData(query, { idField: "id" });
+
+  return (
+    <React.Fragment>
+      <div>
+        <h1 className="card-title text-primary ng-binding">
+          <FormattedMessage id="PregRes.question" />:
+        </h1>
+      </div>
+      <div
+        className="card border-primary h-100"
+        style={{ marginBottom: "5px" }}
+      >
+        <div className="card-body d-flex flex-column align-items-start">
+          <div className="col-xl-12 col-lg-4 mb-4">
+            <p className="card-text" style={{ paddingTop: "10px" }}>
+              {question && question.text && question.text}
+            </p>
           </div>
         </div>
-        <div>
-          <AddAnswer
-            updateAnswerChild={this.updateAnswers}
-            state={this.props.location.state.question}
-          />
-        </div>
-        <div>
-          {this.state.answers
-            .slice(0)
-            .reverse()
-            .map((answer) => (
-              <div key={answer._id}>
-                <CardAnswer state={answer} />
-              </div>
-            ))}
-        </div>
-      </React.Fragment>
-    );
-  }
+      </div>
+      <div>
+        <AddAnswer state={question} questionRef={query} />
+      </div>
+      <div>
+        {question &&
+          question.answers &&
+          question.answers.reverse().map((answer) => (
+            <div key={answer.id}>
+              <CardAnswer state={answer} />
+            </div>
+          ))}
+      </div>
+    </React.Fragment>
+  );
 }
 
 export default ViewQuestion;

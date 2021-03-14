@@ -2,6 +2,7 @@ import React from "react";
 import { Form, Button, Row } from "react-bootstrap";
 import { FormattedMessage } from "react-intl";
 import { AuthContext } from "../Auth/Auth";
+import firebase from "firebase/app";
 
 class AddQuestion extends React.Component {
   static contextType = AuthContext;
@@ -12,7 +13,6 @@ class AddQuestion extends React.Component {
       question: null,
       category: null,
     };
-    
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,30 +21,22 @@ class AddQuestion extends React.Component {
   handleChange(event) {
     this.setState({ value: event.target.formBasicCategory });
   }
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
-    const userId = this.context.currentUser ? this.context.currentUser.uid : null;
-    
+    const userId = this.context.currentUser
+      ? this.context.currentUser.uid
+      : null;
 
     const data = {
       text: event.target.question.value,
       email: event.target.email.value,
       category: parseInt(event.target.category.options.selectedIndex),
-      userId 
+      date: firebase.firestore.FieldValue.serverTimestamp(),
+      answers: [],
+      userId,
     };
 
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    };
-    fetch(process.env.REACT_APP_DB_URL + "/questions/add", requestOptions).then(
-      (response) => {
-        return response
-          .json()
-          .then((data) => (this.props.setQuestionsChild(data), {}));
-      }
-    );
+    await this.props.questionsRef.add(data);
   }
   render() {
     return (
@@ -55,41 +47,43 @@ class AddQuestion extends React.Component {
             className="card bg-primary text-white "
             onSubmit={this.handleSubmit}
           >
-            {this.context.currentUser ?(
-             <Form.Group controlId="formBasicEmail" style={{ display: "none" }}>
-              <Form.Label>
-                <FormattedMessage id="PregRes.emailAddressOptional" />:
-              </Form.Label>
-              <FormattedMessage id="PregRes.permitsPrivateAnswer">
-                {(placeholder) => (
-                  <Form.Control
-                    type="email"
-                    placeholder={placeholder}
-                    name="email"
-                    readOnly
-                    value={this.context.currentUser.email}
-                  />
-                )}
-              </FormattedMessage>
-            </Form.Group>
-             ) : (
-             <Form.Group controlId="formBasicEmail" >
-              <Form.Label>
-                <FormattedMessage id="PregRes.emailAddressOptional" />:
-              </Form.Label>
-              <FormattedMessage id="PregRes.permitsPrivateAnswer">
-                {(placeholder) => (
-                  <Form.Control
-                    type="email"
-                    placeholder={placeholder}
-                    name="email"
-                    value={this.state.email ? this.state.email : undefined}
-                  />
-                )}
-              </FormattedMessage>
-            </Form.Group>
-             )
-            }
+            {this.context.currentUser ? (
+              <Form.Group
+                controlId="formBasicEmail"
+                style={{ display: "none" }}
+              >
+                <Form.Label>
+                  <FormattedMessage id="PregRes.emailAddressOptional" />:
+                </Form.Label>
+                <FormattedMessage id="PregRes.permitsPrivateAnswer">
+                  {(placeholder) => (
+                    <Form.Control
+                      type="email"
+                      placeholder={placeholder}
+                      name="email"
+                      readOnly
+                      value={this.context.currentUser.email}
+                    />
+                  )}
+                </FormattedMessage>
+              </Form.Group>
+            ) : (
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>
+                  <FormattedMessage id="PregRes.emailAddressOptional" />:
+                </Form.Label>
+                <FormattedMessage id="PregRes.permitsPrivateAnswer">
+                  {(placeholder) => (
+                    <Form.Control
+                      type="email"
+                      placeholder={placeholder}
+                      name="email"
+                      value={this.state.email ? this.state.email : undefined}
+                    />
+                  )}
+                </FormattedMessage>
+              </Form.Group>
+            )}
             <Form.Group controlId="formBasicCategory">
               <Form.Label>
                 <FormattedMessage id="PregRes.category" />:
