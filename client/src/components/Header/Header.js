@@ -10,12 +10,11 @@ class Header extends React.Component {
   render() {
     return (
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="#">PregRes</Navbar.Brand>
+        <Navbar.Brand href="/">PregRes</Navbar.Brand>
         {this.context.currentUser ? (
           <Navbar.Text>
             <FormattedMessage id="PregRes.signedInAs" />:
-            <b> {this.context.currentUser.email}</b>! 
-            <span> </span>
+            <b> {this.context.currentUser.email}</b>!<span> </span>
             <a onClick={() => fire.auth().signOut()} href="#">
               <FormattedMessage id="PregRes.signOut" />!
             </a>
