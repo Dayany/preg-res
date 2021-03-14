@@ -23,7 +23,7 @@ class CardQuestion extends React.Component {
                 to={{
                   pathname: `/question`,
                   state: {
-                    question: this.props.state,
+                    questionId: this.props.state.id,
                     firestore: this.props.firestore,
                   },
                 }}

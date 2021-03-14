@@ -10,7 +10,7 @@ function ViewQuestion(props) {
   const firestore = firebase.firestore();
 
   const questionsRef = firestore.collection("questions");
-  const query = questionsRef.doc(props.location.state.question.id);
+  const query = questionsRef.doc(props.location.state.questionId);
   const [question] = useDocumentData(query, { idField: "id" });
 
   return (
