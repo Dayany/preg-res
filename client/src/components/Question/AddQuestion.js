@@ -3,6 +3,10 @@ import { Form, Button, Row } from "react-bootstrap";
 import { FormattedMessage } from "react-intl";
 import { AuthContext } from "../Auth/Auth";
 import firebase from "firebase/app";
+import {
+  errorNotAddedNotification,
+  questionAddedNotification,
+} from "../Notification/RenderNotifications";
 
 class AddQuestion extends React.Component {
   static contextType = AuthContext;
@@ -36,8 +40,14 @@ class AddQuestion extends React.Component {
       userId,
     };
 
-    await this.props.questionsRef.add(data);
+    try {
+      await this.props.questionsRef.add(data);
+      questionAddedNotification();
+    } catch (error) {
+      errorNotAddedNotification();
+    }
   }
+
   render() {
     return (
       <Row>

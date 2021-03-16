@@ -10,7 +10,7 @@ import localeData from "./locales/languages.json";
 import Header from "./components/Header/Header";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import { AuthProvider } from "./components/Auth/Auth";
-import Login from "./components/Auth/Login";
+import Notification from "./components/Notification/Notification";
 
 function App() {
   //Make default language English, unless otherwise specified by the user.
@@ -30,6 +30,7 @@ function App() {
       <AuthProvider>
         <React.Fragment>
           <Header setLocaleChild={setLocale} />
+          <Notification />
           <section
             style={{ paddingTop: "10px !important" }}
             className="jumbotron text-center"

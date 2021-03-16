@@ -29,6 +29,7 @@ class Header extends React.Component {
           <NavDropdown title="Language">
             <Nav.Link onClick={() => this.props.setLocaleChild("en")} href="#">
               English
+              <i class="flag flag-united-states"></i>
             </Nav.Link>
             <Nav.Link onClick={() => this.props.setLocaleChild("es")} href="#">
               Español

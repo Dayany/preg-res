@@ -3,6 +3,10 @@ import { Form, Button, Row } from "react-bootstrap";
 import emailjs from "emailjs-com";
 import { FormattedMessage } from "react-intl";
 import firebase from "firebase/app";
+import {
+  answerAddedNotification,
+  errorNotAddedNotification,
+} from "../Notification/RenderNotifications";
 
 const { useState } = require("react");
 function AddAnswer(props) {
@@ -40,9 +44,14 @@ function AddAnswer(props) {
       date: firebase.firestore.Timestamp.now(),
     };
 
-    await props.questionRef.update({
-      answers: firebase.firestore.FieldValue.arrayUnion(data),
-    });
+    try {
+      await props.questionRef.update({
+        answers: firebase.firestore.FieldValue.arrayUnion(data),
+      });
+      answerAddedNotification();
+    } catch (error) {
+      errorNotAddedNotification();
+    }
     setAnswer("");
   };
 

@@ -19,6 +19,7 @@
     "react-firebase-hooks": "^3.0.2",
     "react-intl": "^5.13.0",
     "react-js-pagination": "^3.0.3",
+    "react-notifications-component": "^3.0.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "web-vitals": "^0.2.4"

@@ -24,7 +24,10 @@
       "PregRes.submit": "Submit",
       "PregRes.answer": "Answer",
       "PregRes.privateAnswer": "Answer privately",
-      "PregRes.writeAnswerHere": "Write your answer here"
+      "PregRes.writeAnswerHere": "Write your answer here",
+      "PregRes.perfect": "Perfect!",
+      "PregRes.Notification.questionAdded": "Your question has been added successfully",
+      "PregRes.Notification.answerAdded": "Your answer has been added successfully"
       
     },
     "es": {
@@ -52,6 +55,9 @@
       "PregRes.submit": "Enviar",
       "PregRes.answer": "Responder",
       "PregRes.privateAnswer": "Responder en privado",
-      "PregRes.writeAnswerHere": "Escriba su respuesta aca"
+      "PregRes.writeAnswerHere": "Escriba su respuesta aca",
+      "PregRes.perfect": "Perfecto!",
+      "PregRes.Notification.questionAdded": "Su pregunta se ha agregado con exito",
+      "PregRes.Notification.answerAdded": "Su respuesta se ha agregado con exito"
     }
   }
