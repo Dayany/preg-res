@@ -11,8 +11,7 @@ const { useState } = require("react");
 function Main() {
   const intl = useIntl();
   const dispatch = useDispatch();
-  const questions = useSelector((state) => state.questions);
-  let isLoaded = false;
+  const questions = useSelector((state) => state.questions.questions);
 
   const categories = [
     intl.formatMessage({ id: "PregRes.all" }),

@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import { Form, Button, Row } from "react-bootstrap";
 import emailjs from "emailjs-com";
 import { FormattedMessage } from "react-intl";
-import firebase from "firebase/app";
 import {
   answerAddedNotification,
   errorNotAddedNotification,
 } from "../Notification/RenderNotifications";
+import { useDispatch } from "react-redux";
 
 function AddAnswer({ question }) {
   const [answer, setAnswer] = useState("");
   const [isChecked, setIsChecked] = useState(false);
+
+  const dispatch = useDispatch();
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -32,6 +34,22 @@ function AddAnswer({ question }) {
     e.target.reset();
   };
 
+  const updateAnswer = (questionID, answer) => {
+    const requestOptions = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(answer),
+    };
+    fetch(
+      `http://localhost:8080/questions/addanswer/${questionID}`,
+      requestOptions
+    ).then((response) => {
+      return response.json().then((data) => addAnswer(data.answers));
+    });
+  };
+  const addAnswer = (question) => {
+    dispatch({ type: "ADD_ANSWER", payload: question });
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
     event.target.email.value = question.email;
@@ -40,10 +58,10 @@ function AddAnswer({ question }) {
 
     const data = {
       text: event.target.answer.value,
-      date: firebase.firestore.Timestamp.now(),
     };
 
     try {
+      updateAnswer(question._id, data);
       answerAddedNotification();
     } catch (error) {
       errorNotAddedNotification();

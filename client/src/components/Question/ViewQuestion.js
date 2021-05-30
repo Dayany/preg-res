@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormattedMessage } from "react-intl";
+import { useDispatch, useSelector } from "react-redux";
 import AddAnswer from "../Answer/AddAnswer";
 import CardAnswer from "../Answer/CardAnswer";
 
 function ViewQuestion(props) {
-  const question = props.location.state.question;
+  const dispatch = useDispatch();
+  const loadQuestion = (question) => {
+    dispatch({ type: "LOAD_QUESTION", payload: question });
+  };
+  useEffect(() => {
+    loadQuestion(props.location.state.question);
+  }, []);
+  const question = useSelector((state) => state.viewQuestion.question);
   return (
     <React.Fragment key={question._id}>
       <div>
@@ -30,11 +38,14 @@ function ViewQuestion(props) {
       <div>
         {question &&
           question.answers &&
-          question.answers.reverse().map((answer) => (
-            <div key={answer.id}>
-              <CardAnswer state={answer} />
-            </div>
-          ))}
+          question.answers
+            .slice(0)
+            .reverse()
+            .map((answer) => (
+              <div key={answer.id}>
+                <CardAnswer answer={answer} />
+              </div>
+            ))}
       </div>
     </React.Fragment>
   );
