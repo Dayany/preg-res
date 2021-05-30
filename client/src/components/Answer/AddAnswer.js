@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Button, Row } from "react-bootstrap";
 import emailjs from "emailjs-com";
 import { FormattedMessage } from "react-intl";
@@ -8,8 +8,7 @@ import {
   errorNotAddedNotification,
 } from "../Notification/RenderNotifications";
 
-const { useState } = require("react");
-function AddAnswer(props) {
+function AddAnswer({ question }) {
   const [answer, setAnswer] = useState("");
   const [isChecked, setIsChecked] = useState(false);
 
@@ -35,7 +34,7 @@ function AddAnswer(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    event.target.email.value = props.state.email;
+    event.target.email.value = question.email;
 
     if (isChecked) return sendEmail(event);
 
@@ -45,9 +44,6 @@ function AddAnswer(props) {
     };
 
     try {
-      await props.questionRef.update({
-        answers: firebase.firestore.FieldValue.arrayUnion(data),
-      });
       answerAddedNotification();
     } catch (error) {
       errorNotAddedNotification();
@@ -87,7 +83,7 @@ function AddAnswer(props) {
               )}
             </FormattedMessage>
           </Form.Group>
-          {props.state && props.state.email && (
+          {question && question.email && (
             <Form.Group controlId="formBasicCheckbox">
               <FormattedMessage id="PregRes.privateAnswer">
                 {(label) => (

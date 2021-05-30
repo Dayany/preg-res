@@ -12,6 +12,7 @@ function Main() {
   const intl = useIntl();
   const dispatch = useDispatch();
   const questions = useSelector((state) => state.questions);
+  let isLoaded = false;
 
   const categories = [
     intl.formatMessage({ id: "PregRes.all" }),
@@ -61,7 +62,7 @@ function Main() {
     .map((question) => {
       return (
         <div key={question.id}>
-          <CardQuestion state={question} />
+          <CardQuestion question={question} />
         </div>
       );
     });

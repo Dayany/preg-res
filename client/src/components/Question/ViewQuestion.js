@@ -3,18 +3,10 @@ import { FormattedMessage } from "react-intl";
 import AddAnswer from "../Answer/AddAnswer";
 import CardAnswer from "../Answer/CardAnswer";
 
-import firebase from "firebase/app";
-import { useDocumentData } from "react-firebase-hooks/firestore";
-
 function ViewQuestion(props) {
-  const firestore = firebase.firestore();
-
-  const questionsRef = firestore.collection("questions");
-  const query = questionsRef.doc(props.location.state.questionId);
-  const [question] = useDocumentData(query, { idField: "id" });
-
+  const question = props.location.state.question;
   return (
-    <React.Fragment>
+    <React.Fragment key={question._id}>
       <div>
         <h1 className="card-title text-primary ng-binding">
           <FormattedMessage id="PregRes.question" />:
@@ -27,13 +19,13 @@ function ViewQuestion(props) {
         <div className="card-body d-flex flex-column align-items-start">
           <div className="col-xl-12 col-lg-4 mb-4">
             <p className="card-text" style={{ paddingTop: "10px" }}>
-              {question && question.text && question.text}
+              {question && question.text}
             </p>
           </div>
         </div>
       </div>
       <div>
-        <AddAnswer state={question} questionRef={query} />
+        <AddAnswer question={question} />
       </div>
       <div>
         {question &&
