@@ -16,7 +16,7 @@ const questionSchema = mongoose.Schema({
   email: {
     type: String,
   },
-  category:{
+  category: {
     type: Number,
     default: 0,
   },
@@ -25,9 +25,12 @@ const questionSchema = mongoose.Schema({
       text: String,
     },
     {
-      createdAt: Date
-    }
+      date: Date,
+    },
   ],
+  userId: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("Question", questionSchema);
