@@ -21,7 +21,7 @@ router.post("/add", async (req, res) => {
 //Get all questions
 router.get("/", async (req, res) => {
   try {
-    const question = await Question.find().sort({ _id: -1 });
+    const question = await Question.find().sort({ date: "asc" });
     res.json(question);
   } catch (err) {
     res.json({ message: err });
@@ -33,8 +33,8 @@ router.patch("/addanswer/:questionId", async (req, res) => {
   try {
     const updatedAnswer = await Question.findOneAndUpdate(
       { _id: req.params.questionId },
-      { $addToSet: { answers: { text: req.body.text , createdAt: Date.now} } }, 
-      {new: true}
+      { $addToSet: { answers: { text: req.body.text, createdAt: Date.now } } },
+      { new: true }
     );
     res.json(updatedAnswer);
   } catch (error) {
