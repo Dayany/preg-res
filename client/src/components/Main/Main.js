@@ -12,9 +12,6 @@ function Main() {
   const intl = useIntl();
   const dispatch = useDispatch();
   const questions = useSelector((state) => state.questions);
-  const addInitialQuestions = (questions) => {
-    dispatch({ type: "ADD_INITIAL_QUESTIONS", payload: questions });
-  };
 
   const categories = [
     intl.formatMessage({ id: "PregRes.all" }),
@@ -26,21 +23,21 @@ function Main() {
 
   useEffect(() => {
     async function getQuestions() {
+      const addInitialQuestions = (questions) => {
+        dispatch({ type: "ADD_INITIAL_QUESTIONS", payload: questions });
+      };
       const requestOptions = {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       };
       fetch("http://localhost:8080/questions", requestOptions).then(
         (response) => {
-          return response
-            .json()
-            .then((data) => (addInitialQuestions(data), {}));
+          return response.json().then((data) => addInitialQuestions(data));
         }
       );
     }
     getQuestions();
   }, []);
-
   const [state, setState] = useState({ category: 0, pageNumber: 1 });
   const questionsPerPage = 10;
   let pagesVisited = (state.pageNumber - 1) * questionsPerPage;
