@@ -33,7 +33,7 @@ router.patch("/addanswer/:questionId", async (req, res) => {
   try {
     const updatedAnswer = await Question.findOneAndUpdate(
       { _id: req.params.questionId },
-      { $addToSet: { answers: { text: req.body.text, createdAt: Date.now } } },
+      { $addToSet: { answers: { text: req.body.text, date: Date.now } } },
       { new: true }
     );
     res.json(updatedAnswer);
