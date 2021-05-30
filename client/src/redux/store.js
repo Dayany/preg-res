@@ -1,5 +1,4 @@
 import { createStore } from "redux";
-import { createSlice, configureStore } from "@reduxjs/toolkit";
 /**
  * This is a reducer - a function that takes a current state value and an
  * action object describing "what happened", and returns a new state value.
@@ -13,7 +12,6 @@ import { createSlice, configureStore } from "@reduxjs/toolkit";
  * we use a switch statement, but it's not required.
  */
 const questionsReducer = (state = { questions: [] }, action) => {
-  console.log(state);
   switch (action.type) {
     case "ADD_INITIAL_QUESTIONS":
       return { questions: [...action.payload] };
@@ -23,18 +21,6 @@ const questionsReducer = (state = { questions: [] }, action) => {
       return state;
   }
 };
-
-// const questionsSlice = createSlice({
-//   name: "questions",
-//   initialState: {
-//     questions: [],
-//   },
-//   reducers: {
-//     add: (state, action) => {
-//       [...state.questions, action.payload];
-//     },
-//   },
-// });
 
 // Create a Redux store holding the state of your app.
 // Its API is { subscribe, dispatch, getState }.
