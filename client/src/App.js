@@ -11,6 +11,8 @@ import Header from "./components/Header/Header";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import { AuthProvider } from "./components/Auth/Auth";
 import Notification from "./components/Notification/Notification";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 function App() {
   //Make default language English, unless otherwise specified by the user.
@@ -26,27 +28,29 @@ function App() {
     localeData.en;
 
   return (
-    <IntlProvider locale={locale} messages={messages}>
-      <AuthProvider>
-        <React.Fragment>
-          <Header setLocaleChild={setLocale} />
-          <Notification />
-          <section
-            style={{ paddingTop: "10px !important" }}
-            className="jumbotron text-center"
-          >
-            <Container>
-              <Router>
-                <Switch>
-                  <Route path="/" exact component={Main} />
-                  <Route path="/question" component={ViewQuestion} />
-                </Switch>
-              </Router>
-            </Container>
-          </section>
-        </React.Fragment>
-      </AuthProvider>
-    </IntlProvider>
+    <Provider store={store}>
+      <IntlProvider locale={locale} messages={messages}>
+        <AuthProvider>
+          <React.Fragment>
+            <Header setLocaleChild={setLocale} />
+            <Notification />
+            <section
+              style={{ paddingTop: "10px !important" }}
+              className="jumbotron text-center"
+            >
+              <Container>
+                <Router>
+                  <Switch>
+                    <Route path="/" exact component={Main} />
+                    <Route path="/question" component={ViewQuestion} />
+                  </Switch>
+                </Router>
+              </Container>
+            </section>
+          </React.Fragment>
+        </AuthProvider>
+      </IntlProvider>
+    </Provider>
   );
 }
 

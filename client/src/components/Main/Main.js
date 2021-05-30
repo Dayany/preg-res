@@ -8,6 +8,7 @@ import { useIntl } from "react-intl";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import { useDispatch } from "react-redux";
 
 const { useState } = require("react");
 
@@ -15,6 +16,11 @@ const firestore = firebase.firestore();
 
 function Main() {
   const intl = useIntl();
+  const dispatch = useDispatch();
+
+  const addQuestion = (question) => {
+    dispatch({ type: "ADD_QUESTION", payload: question });
+  };
 
   const categories = [
     intl.formatMessage({ id: "PregRes.all" }),
