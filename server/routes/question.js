@@ -2,6 +2,18 @@ const express = require("express");
 const Question = require("../models/Question");
 const router = express.Router();
 
+//Get all questions
+router.get("/", async (req, res) => {
+  try {
+    const question = await Question.find().sort({ date: "asc" });
+    res.status(200);
+    res.json(question);
+  } catch (err) {
+    res.status(500);
+    res.json({ message: err });
+  }
+});
+
 //Add a question
 router.post("/add", async (req, res) => {
   const question = new Question({
@@ -12,19 +24,11 @@ router.post("/add", async (req, res) => {
 
   try {
     const savedQuestion = await question.save();
+    res.status(200);
     res.json(savedQuestion);
   } catch (error) {
+    res.status(500);
     res.json({ message: error });
-  }
-});
-
-//Get all questions
-router.get("/", async (req, res) => {
-  try {
-    const question = await Question.find().sort({ date: "asc" });
-    res.json(question);
-  } catch (err) {
-    res.json({ message: err });
   }
 });
 
@@ -36,32 +40,12 @@ router.patch("/addanswer/:questionId", async (req, res) => {
       { $addToSet: { answers: { text: req.body.text, date: Date.now } } },
       { new: true }
     );
+    res.status(200);
     res.json(updatedAnswer);
   } catch (error) {
+    res.status(500);
     res.json({ message: error });
   }
 });
-//Update charge
-// router.patch("/addanswer/:chargeId", async (req, res) => {
-//   try {
-//     const updatedCharge = await Charge.updateOne(
-//       { _id: req.params.chargeId },
-//       { $set: { answers : req.body.answer } }
-//     );
-//     res.json(updatedCharge);
-//   } catch (error) {
-//     res.json({ message: error });
-//   }
-// });
-
-//Delete question
-// router.delete("/:questionId", async (req, res) => {
-//   try {
-//     const removedQuestion = await Question.remove({ _id: req.params.questionId });
-//     res.json(removedQuestion);
-//   } catch (error) {
-//     res.json({ message: error });
-//   }
-// });
 
 module.exports = router;
